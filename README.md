@@ -7,11 +7,31 @@ A secure web application built with **Flask** that demonstrates modern web secur
 ## 📸 Project Preview
 
 - Register Page
+<<<<<<< HEAD
 - Login Page
 - Dashboard
 - Secure Notes
 - File Upload
 - Security Logs
+
+  <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/4caadd95-e1ce-4ed5-b94f-7432f3a4aa60" />
+
+- Login Page
+  <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/ece41545-e6a3-41a2-b67a-4ffd5457b54d" />
+
+- Dashboard
+  <img width="1892" height="1079" alt="image" src="https://github.com/user-attachments/assets/75603b91-8ee6-41ec-b07e-6252908b9c93" />
+
+- Secure Notes
+  <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/a840b78f-fbe3-4343-9e10-0a9d14c572ef" />
+
+- File Upload
+  <img width="1919" height="1077" alt="image" src="https://github.com/user-attachments/assets/9d8f5f5d-13e0-4a0c-aca6-e17694a3df1e" />
+
+- Security Logs
+  <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/a39efd2b-484c-4a79-8436-968b45b7f7d8" />
+
+
 
 ---
 
@@ -185,10 +205,18 @@ python app.py
 
 **Shivam Kumar**
 
+<<<<<<< HEAD
 B.Tech CS-IT
+=======
+B.Tech CS-IT(3rd Year)
+>>>>>>> d836fd96aaa9a451746c6cf0626d5c5bf32da475
 
 ---
 
 # ⭐ If you like this project
 
+<<<<<<< HEAD
 Give it a ⭐ on GitHub.
+=======
+Give it a ⭐ on GitHub.
+>>>>>>> d836fd96aaa9a451746c6cf0626d5c5bf32da475
