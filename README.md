@@ -205,11 +205,8 @@ python app.py
 
 **Shivam Kumar**
 
-<<<<<<< HEAD
-B.Tech CS-IT
-=======
 B.Tech CS-IT(3rd Year)
->>>>>>> d836fd96aaa9a451746c6cf0626d5c5bf32da475
+
 
 ---
 
