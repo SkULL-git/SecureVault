@@ -1,0 +1,194 @@
+{% extends "base.html" %}
+
+{% block title %}
+Secure File Upload | SecureVault
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- Upload Card -->
+
+    <div class="card shadow-lg border-0 rounded-4 mb-4">
+
+        <div class="card-header bg-success text-white">
+
+            <h3 class="mb-0">
+
+                <i class="fas fa-upload me-2"></i>
+
+                Secure File Upload
+
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <form method="POST" enctype="multipart/form-data">
+
+                {{ form.hidden_tag() }}
+
+                <div class="mb-3">
+
+                    <label class="form-label">
+
+                        Select File
+
+                    </label>
+
+                    <input
+                        type="file"
+                        name="file"
+                        class="form-control"
+                        required>
+
+                    <div class="form-text">
+
+                        Allowed:
+                        PDF, PNG, JPG, JPEG, TXT
+
+                    </div>
+
+                </div>
+
+                <button
+                    type="submit"
+                    class="btn btn-success">
+
+                    <i class="fas fa-cloud-upload-alt me-2"></i>
+
+                    Upload File
+
+                </button>
+
+                <a
+                    href="{{ url_for('auth.dashboard') }}"
+                    class="btn btn-secondary">
+
+                    <i class="fas fa-arrow-left me-2"></i>
+
+                    Dashboard
+
+                </a>
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <!-- Uploaded Files -->
+
+    <div class="card shadow-lg border-0 rounded-4">
+
+        <div class="card-header bg-dark text-white">
+
+            <h4 class="mb-0">
+
+                <i class="fas fa-folder-open me-2"></i>
+
+                Uploaded Files
+
+            </h4>
+
+        </div>
+
+        <div class="card-body">
+
+            {% if files %}
+
+                <table class="table table-striped align-middle">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>File Name</th>
+
+                            <th>Download</th>
+
+                            <th>Delete</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for file in files %}
+
+                        <tr>
+
+                            <td>
+
+                                <i class="fas fa-file me-2 text-primary"></i>
+
+                                {{ file.filename }}
+
+                            </td>
+
+                            <td>
+
+                                <a
+                                    href="{{ url_for('upload.download_file', file_id=file.id) }}"
+                                    class="btn btn-primary btn-sm">
+
+                                    <i class="fas fa-download me-1"></i>
+
+                                    Download
+
+                                </a>
+
+                            </td>
+
+                            <td>
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('upload.delete_file', file_id=file.id) }}">
+
+                                    {{ form.hidden_tag() }}
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-danger btn-sm">
+
+                                        <i class="fas fa-trash me-1"></i>
+
+                                        Delete
+
+                                    </button>
+
+                                </form>
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            {% else %}
+
+                <div class="alert alert-info text-center">
+
+                    <i class="fas fa-info-circle me-2"></i>
+
+                    No files uploaded yet.
+
+                </div>
+
+            {% endif %}
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

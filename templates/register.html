@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register | SecureVault
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-5 col-md-7">
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-body p-5">
+
+                <div class="text-center mb-4">
+
+                    <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+
+                    <h2 class="fw-bold">
+
+                        Create Account
+
+                    </h2>
+
+                    <p class="text-muted">
+
+                        Register to access SecureVault
+
+                    </p>
+
+                </div>
+
+                <form method="POST">
+
+                    {{ form.hidden_tag() }}
+
+                    <!-- Full Name -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Full Name
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            class="form-control"
+                            placeholder="Enter your full name"
+                            required>
+
+                    </div>
+
+                    <!-- Email -->
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Email Address
+
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            placeholder="Enter your email"
+                            required>
+
+                    </div>
+
+                    <!-- Password -->
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Password
+
+                        </label>
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Create a strong password"
+                            required>
+
+                        <!-- Password Strength -->
+
+                        <div id="password-strength" class="mt-2"></div>
+
+                        <div class="form-text">
+
+                            Password must contain at least 6 characters.
+
+                        </div>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-primary w-100">
+
+                        <i class="fas fa-user-plus me-2"></i>
+
+                        Create Account
+
+                    </button>
+
+                </form>
+
+                <hr>
+
+                <div class="text-center">
+
+                    <p class="mb-0">
+
+                        Already have an account?
+
+                        <a href="{{ url_for('auth.login') }}">
+
+                            Login
+
+                        </a>
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

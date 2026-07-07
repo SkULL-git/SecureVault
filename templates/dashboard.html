@@ -1,0 +1,360 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard | SecureVault
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <!-- Welcome Card -->
+
+    <div class="card shadow-lg border-0 rounded-4 mb-4">
+
+        <div class="card-body">
+
+            <h2 class="fw-bold">
+
+                👋 Welcome, {{ user_name }}
+
+            </h2>
+
+            <p class="text-muted mb-0">
+
+                Welcome to <strong>SecureVault</strong> —
+                Your Secure Web Application.
+
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- Dashboard Analytics -->
+
+<div class="row g-4 mb-5">
+
+    <div class="col-md-3">
+
+        <div class="card shadow border-0 text-center h-100">
+
+            <div class="card-body">
+
+                <i class="fas fa-sticky-note fa-2x text-primary mb-3"></i>
+
+                <h5>Total Notes</h5>
+
+                <h2 class="fw-bold">
+
+                    {{ total_notes }}
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow border-0 text-center h-100">
+
+            <div class="card-body">
+
+                <i class="fas fa-folder fa-2x text-success mb-3"></i>
+
+                <h5>Total Files</h5>
+
+                <h2 class="fw-bold">
+
+                    {{ total_files }}
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow border-0 text-center h-100">
+
+            <div class="card-body">
+
+                <i class="fas fa-history fa-2x text-warning mb-3"></i>
+
+                <h5>Security Logs</h5>
+
+                <h2 class="fw-bold">
+
+                    {{ total_logs }}
+
+                </h2>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="card shadow border-0 text-center h-100">
+
+            <div class="card-body">
+
+                <i class="fas fa-calendar-alt fa-2x text-info mb-3"></i>
+
+                <h5>Member Since</h5>
+
+                <h6 class="fw-bold">
+
+                    {{ joined_date }}
+
+                </h6>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+    <!-- Quick Actions -->
+
+    <div class="row g-4">
+
+        <!-- Secure Notes -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="fas fa-lock fa-3x text-primary mb-3"></i>
+
+                    <h4>Secure Notes</h4>
+
+                    <p class="text-muted">
+
+                        Store your notes securely using encryption.
+
+                    </p>
+
+                    <a
+                        href="{{ url_for('notes.notes_page') }}"
+                        class="btn btn-primary">
+
+                        <i class="fas fa-sticky-note me-2"></i>
+
+                        Open Notes
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Secure File Upload -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="fas fa-upload fa-3x text-success mb-3"></i>
+
+                    <h4>Secure File Upload</h4>
+
+                    <p class="text-muted">
+
+                        Upload and manage files securely.
+
+                    </p>
+
+                    <a
+                        href="{{ url_for('upload.upload_file') }}"
+                        class="btn btn-success">
+
+                        <i class="fas fa-upload me-2"></i>
+
+                        Open Upload
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Change Password -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="fas fa-key fa-3x text-info mb-3"></i>
+
+                    <h4>Change Password</h4>
+
+                    <p class="text-muted">
+
+                        Update your account password securely.
+
+                    </p>
+
+                    <a
+                        href="{{ url_for('auth.change_password') }}"
+                        class="btn btn-info text-white">
+
+                        <i class="fas fa-key me-2"></i>
+
+                        Change Password
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Security Logs -->
+
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="fas fa-history fa-3x text-warning mb-3"></i>
+
+                    <h4>Security Logs</h4>
+
+                    <p class="text-muted">
+
+                        View your recent account security activities.
+
+                    </p>
+
+                    <a
+                        href="{{ url_for('logs.security_logs') }}"
+                        class="btn btn-warning">
+
+                        <i class="fas fa-history me-2"></i>
+
+                        View Logs
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Security Features -->
+
+    <div class="row mt-5 g-4">
+
+        <div class="col-md-4">
+
+            <div class="card border-success shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="fas fa-lock fa-2x text-success mb-3"></i>
+
+                    <h5>Encrypted Storage</h5>
+
+                    <p class="text-muted">
+
+                        Your notes are encrypted before being stored.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-primary shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="fas fa-user-shield fa-2x text-primary mb-3"></i>
+
+                    <h5>Secure Authentication</h5>
+
+                    <p class="text-muted">
+
+                        Passwords are protected using bcrypt hashing.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card border-warning shadow-sm h-100">
+
+                <div class="card-body text-center">
+
+                    <i class="fas fa-shield-alt fa-2x text-warning mb-3"></i>
+
+                    <h5>OWASP Security</h5>
+
+                    <p class="text-muted">
+
+                        Built following secure coding practices inspired by the OWASP Top 10.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Logout -->
+
+    <div class="text-center mt-5">
+
+        <a
+            href="{{ url_for('auth.logout') }}"
+            class="btn btn-danger btn-lg">
+
+            <i class="fas fa-sign-out-alt me-2"></i>
+
+            Logout
+
+        </a>
+
+    </div>
+
+</div>
+
+{% endblock %}

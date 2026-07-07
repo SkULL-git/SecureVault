@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}
+Secure Notes | SecureVault
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+
+    <div class="col-lg-10 mx-auto">
+
+        <!-- Add Note Card -->
+
+        <div class="card shadow-lg border-0 rounded-4 mb-4">
+
+            <div class="card-header bg-primary text-white">
+
+                <h3 class="mb-0">
+
+                    <i class="fas fa-lock me-2"></i>
+
+                    Secure Notes
+
+                </h3>
+
+            </div>
+
+            <div class="card-body">
+
+                <form method="POST">
+
+                    {{ form.hidden_tag() }}
+
+                    <div class="mb-3">
+
+                        <label class="form-label">
+
+                            Note Title
+
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            class="form-control"
+                            placeholder="Enter Note Title"
+                            required>
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label">
+
+                            Secure Note
+
+                        </label>
+
+                        <textarea
+                            class="form-control"
+                            rows="6"
+                            name="note"
+                            placeholder="Write your secure note..."
+                            required></textarea>
+
+                    </div>
+
+                    <button
+                        type="submit"
+                        class="btn btn-success">
+
+                        <i class="fas fa-save me-2"></i>
+
+                        Save Securely
+
+                    </button>
+
+                    <a
+                        href="{{ url_for('auth.dashboard') }}"
+                        class="btn btn-secondary">
+
+                        <i class="fas fa-arrow-left me-2"></i>
+
+                        Dashboard
+
+                    </a>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- Notes List -->
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-header bg-dark text-white">
+
+                <h4 class="mb-0">
+
+                    <i class="fas fa-file-alt me-2"></i>
+
+                    Your Secure Notes
+
+                </h4>
+
+            </div>
+
+            <div class="card-body">
+
+                {% if notes %}
+
+                    {% for note in notes %}
+
+                        <div class="card border-start border-4 border-primary shadow-sm mb-3">
+
+                            <div class="card-body">
+
+                                <h5 class="fw-bold">
+
+                                    <i class="fas fa-sticky-note text-primary me-2"></i>
+
+                                    {{ note.title }}
+
+                                </h5>
+
+                                <hr>
+
+                                <p class="mb-3">
+
+                                    {{ note.note }}
+
+                                </p>
+
+                                <form
+                                    method="POST"
+                                    action="{{ url_for('notes.delete_note', note_id=note.id) }}">
+
+                                    {{ form.hidden_tag() }}
+
+                                    <button
+                                        type="submit"
+                                        class="btn btn-danger btn-sm">
+
+                                        <i class="fas fa-trash-alt me-2"></i>
+
+                                        Delete
+
+                                    </button>
+
+                                </form>
+
+                            </div>
+
+                        </div>
+
+                    {% endfor %}
+
+                {% else %}
+
+                    <div class="alert alert-info text-center">
+
+                        <i class="fas fa-info-circle me-2"></i>
+
+                        You haven't created any secure notes yet.
+
+                    </div>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
