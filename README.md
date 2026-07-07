@@ -7,7 +7,7 @@ A secure web application built with **Flask** that demonstrates modern web secur
 ## 📸 Project Preview
 
 - Register Page
-<<<<<<< HEAD
+
 - Login Page
 - Dashboard
 - Secure Notes
@@ -212,8 +212,5 @@ B.Tech CS-IT(3rd Year)
 
 # ⭐ If you like this project
 
-<<<<<<< HEAD
+
 Give it a ⭐ on GitHub.
-=======
-Give it a ⭐ on GitHub.
->>>>>>> d836fd96aaa9a451746c6cf0626d5c5bf32da475
