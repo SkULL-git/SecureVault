@@ -8,12 +8,6 @@ A secure web application built with **Flask** that demonstrates modern web secur
 
 - Register Page
 
-- Login Page
-- Dashboard
-- Secure Notes
-- File Upload
-- Security Logs
-
   <img width="1919" height="1079" alt="image" src="https://github.com/user-attachments/assets/4caadd95-e1ce-4ed5-b94f-7432f3a4aa60" />
 
 - Login Page
