@@ -1,0 +1,158 @@
+{% extends "base.html" %}
+
+{% block title %}
+Recovery Key | SecureVault
+{% endblock %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-lg-7 col-md-9">
+
+        <div class="card shadow-lg border-0 rounded-4">
+
+            <div class="card-header bg-danger text-white">
+
+                <h3 class="mb-0">
+
+                    <i class="fas fa-key me-2"></i>
+
+                    Recovery Key
+
+                </h3>
+
+            </div>
+
+            <div class="card-body p-4">
+
+                {% if recovery_key %}
+
+                    <div class="alert alert-warning">
+
+                        <strong>Save this key now.</strong>
+
+                        SecureVault stores only a hash of it, so the key
+                        cannot be displayed again after leaving this page.
+
+                    </div>
+
+                    <label class="form-label fw-bold">
+                        Your Recovery Key
+                    </label>
+
+                    <div class="input-group mb-3">
+
+                        <input
+                            id="recoveryKey"
+                            class="form-control font-monospace"
+                            value="{{ recovery_key }}"
+                            readonly>
+
+                        <button
+                            class="btn btn-outline-primary"
+                            type="button"
+                            onclick="copyRecoveryKey()">
+
+                            Copy
+
+                        </button>
+
+                    </div>
+
+                    <p class="text-muted">
+                        Account: {{ email }}
+                    </p>
+
+                    <div class="d-flex gap-2">
+
+                        <a
+                            href="{{ url_for('auth.login') }}"
+                            class="btn btn-success">
+
+                            Go to Login
+
+                        </a>
+
+                        {% if regenerated %}
+
+                            <a
+                                href="{{ url_for('auth.dashboard') }}"
+                                class="btn btn-secondary">
+
+                                Dashboard
+
+                            </a>
+
+                        {% endif %}
+
+                    </div>
+
+                {% else %}
+
+                    <p class="text-muted">
+
+                        Generate a new recovery key. Your current password is
+                        required and the previous recovery key will stop working.
+
+                    </p>
+
+                    <form method="POST">
+
+                        {{ form.hidden_tag() }}
+
+                        <div class="mb-4">
+
+                            <label class="form-label">
+                                Current Password
+                            </label>
+
+                            <input
+                                type="password"
+                                name="current_password"
+                                class="form-control"
+                                required>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-danger">
+
+                            <i class="fas fa-key me-2"></i>
+
+                            Generate New Recovery Key
+
+                        </button>
+
+                        <a
+                            href="{{ url_for('auth.dashboard') }}"
+                            class="btn btn-secondary">
+
+                            Dashboard
+
+                        </a>
+
+                    </form>
+
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+function copyRecoveryKey() {
+    const key = document.getElementById("recoveryKey").value;
+
+    navigator.clipboard.writeText(key).then(() => {
+        alert("Recovery key copied. Store it somewhere safe.");
+    });
+}
+</script>
+
+{% endblock %}

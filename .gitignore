@@ -1,0 +1,38 @@
+# Python
+
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+
+venv/
+env/
+
+# Environment Variables
+
+.env
+
+# Flask
+
+instance/
+
+# Uploads
+
+uploads/
+
+# VS Code
+
+.vscode/
+
+# OS
+
+.DS_Store
+Thumbs.db
+
+# Database
+
+*.db
+
+secret.key
