@@ -23,7 +23,8 @@ class User(db.Model):
         nullable=True
     )
 
-    role = db.Column(db.String(20), default="user")
+    role = db.Column(db.String(20), default="user", nullable=False)
+    is_active = db.Column(db.Boolean, default=True, nullable=False)
 
     created_at = db.Column(
         db.DateTime,

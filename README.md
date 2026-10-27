@@ -138,6 +138,8 @@ SecureVault/
 │
 ├── forms/
 │   └── forms.py
+├── create_admin.py
+├── .env.example
 │
 ├── templates/
 │
@@ -183,6 +185,38 @@ python app.py
 - ✅ Content Security Policy
 - ✅ Encrypted Notes
 - ✅ Audit Logging
+
+---
+
+# 🧰 PostgreSQL + Admin Dashboard Upgrade
+
+## New features
+- PostgreSQL support through `DATABASE_URL` (SQLite remains the local default).
+- Flask-Migrate/Alembic support for schema migrations.
+- Admin overview cards for user counts, notes, uploaded files and audit events.
+- User search, account enable/disable, and role promotion/demotion.
+- Cross-account security audit view (metadata only; never decrypts private notes).
+- Admin routes re-check the current user's database role on each request.
+- Protections against disabling/demoting the current admin or removing the last active admin.
+
+## Local setup
+1. Create and activate a virtual environment.
+2. Install dependencies: `pip install -r requirements.txt`
+3. Copy `.env.example` to `.env` and set strong, unique `SECRET_KEY` and `JWT_SECRET_KEY` values.
+4. For PostgreSQL, create a database and set `DATABASE_URL=postgresql+psycopg://USER:PASSWORD@HOST:5432/securevault`.
+5. Run the app once with `python app.py`. The app creates missing tables and applies a small compatibility update for the `role`, `is_active`, `recovery_key_hash`, and `encrypted` columns on existing SQLite/PostgreSQL databases.
+6. Register your normal account in SecureVault, then run `python create_admin.py` and confirm that account's email. Do not hardcode admin credentials in source code.
+7. For future schema changes, initialize Flask-Migrate once (`flask --app app db init`) and then use `flask --app app db migrate -m "Describe schema change"` followed by `flask --app app db upgrade`. Review generated migrations before applying them. Do not run `db init` again if `migrations/` already exists.
+
+`db.create_all()` creates missing tables but does not modify existing tables; the compatibility code above only covers the listed legacy columns. Use reviewed migrations for future schema changes.
+
+## Production notes
+- Configure HTTPS and set `SESSION_COOKIE_SECURE=true`.
+- Use a managed PostgreSQL database, backups, and a tested migration/rollback plan.
+- Set strong secrets in the hosting provider's environment settings; never commit `.env`.
+- Admin access should use a unique account and a strong password. Add MFA before exposing the app publicly.
+- The audit view exposes IP addresses and account activity to administrators; set an appropriate retention policy.
+- Uploaded encrypted files currently live on local disk. For multi-instance hosting, configure durable private storage and backups; a PostgreSQL migration does not migrate the file bytes themselves.
 
 ---
 

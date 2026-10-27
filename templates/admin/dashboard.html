@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard | SecureVault{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-3">
+  <div><span class="badge bg-danger mb-2">ADMIN CONSOLE</span><h1 class="fw-bold text-light mb-1">Security Overview</h1><p class="text-secondary mb-0">Welcome, {{ admin_user.name }}. Manage accounts and review security activity.</p></div>
+  <div class="d-flex gap-2"><a class="btn btn-outline-info" href="{{ url_for('admin.users') }}"><i class="fas fa-users me-2"></i>Manage users</a><a class="btn btn-outline-warning" href="{{ url_for('admin.security') }}"><i class="fas fa-shield-halved me-2"></i>Audit logs</a></div>
+</div>
+<div class="row g-3 mb-4">
+{% for label, value, icon, color in [
+ ('Total users', total_users, 'fa-users', 'primary'),
+ ('Active accounts', active_users, 'fa-user-check', 'success'),
+ ('Disabled accounts', disabled_users, 'fa-user-lock', 'danger'),
+ ('Encrypted notes', total_notes, 'fa-note-sticky', 'info'),
+ ('Stored files', total_files, 'fa-file-shield', 'warning'),
+ ('Security events', total_events, 'fa-list-check', 'secondary')
+] %}
+<div class="col-6 col-lg-4 col-xl-2"><div class="card h-100 shadow border-0"><div class="card-body"><i class="fas {{ icon }} text-{{ color }} fs-4 mb-3"></i><div class="text-secondary small">{{ label }}</div><div class="fs-2 fw-bold">{{ value }}</div></div></div></div>
+{% endfor %}
+</div>
+<div class="card border-0 shadow rounded-4"><div class="card-body p-4">
+<div class="d-flex justify-content-between align-items-center mb-3"><h4 class="mb-0">Recent security activity</h4><span class="badge bg-info text-dark">{{ recent_logins }} logins in 7 days</span></div>
+<div class="table-responsive"><table class="table table-dark table-hover align-middle"><thead><tr><th>Time (UTC)</th><th>User ID</th><th>Event</th><th>IP address</th></tr></thead><tbody>
+{% for log in recent_logs %}<tr><td>{{ log.created_at.strftime('%Y-%m-%d %H:%M') if log.created_at else '—' }}</td><td>{{ log.user_id }}</td><td>{{ log.action }}</td><td>{{ log.ip_address }}</td></tr>
+{% else %}<tr><td colspan="4" class="text-secondary text-center py-4">No security events recorded yet.</td></tr>{% endfor %}
+</tbody></table></div>
+<p class="small text-secondary mb-0">Privacy note: this console shows audit metadata only. It does not display or decrypt users' private notes or uploaded files.</p>
+</div></div>
+{% endblock %}

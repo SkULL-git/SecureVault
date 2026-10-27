@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}User Management | SecureVault{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4"><div><span class="badge bg-danger mb-2">ADMIN CONSOLE</span><h1 class="fw-bold text-light mb-1">User management</h1><p class="text-secondary mb-0">Search accounts, manage access and assign roles.</p></div><a href="{{ url_for('admin.dashboard') }}" class="btn btn-outline-light"><i class="fas fa-arrow-left me-2"></i>Overview</a></div>
+<form method="get" class="row g-2 mb-3"><div class="col-md-6"><input class="form-control" type="search" name="q" value="{{ query }}" placeholder="Search name or email"></div><div class="col-auto"><button class="btn btn-primary" type="submit">Search</button></div><div class="col-auto"><a class="btn btn-outline-secondary" href="{{ url_for('admin.users') }}">Clear</a></div></form>
+<div class="card border-0 shadow rounded-4"><div class="card-body"><div class="table-responsive"><table class="table table-dark table-hover align-middle"><thead><tr><th>User</th><th>Role</th><th>Status</th><th>Joined</th><th>Last login</th><th>Actions</th></tr></thead><tbody>
+{% for user in users %}<tr><td><div class="fw-semibold">{{ user.name }}</div><div class="small text-secondary">{{ user.email }}</div><div class="small text-secondary">ID: {{ user.id }}</div></td><td><span class="badge {{ 'bg-danger' if user.role == 'admin' else 'bg-secondary' }}">{{ user.role }}</span></td><td><span class="badge {{ 'bg-success' if user.is_active else 'bg-warning text-dark' }}">{{ 'Active' if user.is_active else 'Disabled' }}</span></td><td>{{ user.created_at.strftime('%Y-%m-%d') if user.created_at else '—' }}</td><td>{{ user.last_login.strftime('%Y-%m-%d %H:%M') if user.last_login else 'Never' }}</td><td><div class="d-flex flex-wrap gap-2">
+{% if user.id != admin_user.id %}
+<form method="post" action="{{ url_for('admin.toggle_active', user_id=user.id, q=query) }}">{{ form.csrf_token }}<button class="btn btn-sm {{ 'btn-outline-success' if not user.is_active else 'btn-outline-danger' }}" type="submit">{{ 'Enable' if not user.is_active else 'Disable' }}</button></form>
+<form method="post" action="{{ url_for('admin.toggle_role', user_id=user.id, q=query) }}">{{ form.csrf_token }}<button class="btn btn-sm btn-outline-info" type="submit">{{ 'Make admin' if user.role != 'admin' else 'Remove admin' }}</button></form>
+{% else %}<span class="small text-secondary">Current account</span>{% endif %}
+</div></td></tr>{% else %}<tr><td colspan="6" class="text-center text-secondary py-4">No users match your search.</td></tr>{% endfor %}
+</tbody></table></div><p class="small text-secondary mb-0">Showing up to 200 accounts. Role changes and access changes are recorded in the security audit log.</p></div></div>
+{% endblock %}

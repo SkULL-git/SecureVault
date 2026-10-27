@@ -142,6 +142,10 @@ def login():
             email=email
         ).first()
 
+        if user and not user.is_active:
+            flash("This account has been disabled. Contact an administrator.", "danger")
+            return redirect(url_for("auth.login"))
+
         if user and user.account_locked_until:
 
             if datetime.utcnow() < user.account_locked_until:
@@ -182,8 +186,10 @@ def login():
 
             db.session.commit()
 
+            session.clear()
             session["user_id"] = user.id
             session["user_name"] = user.name
+            session["role"] = user.role
 
             log_security_event(
                 user.id,
